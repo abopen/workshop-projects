@@ -1,0 +1,11 @@
+[
+    {
+        "font": "triplex",
+	"scale": 2.0,
+        "red": 0,
+        "green": 255,
+        "blue": 0,
+        "text_line": "$time",
+	"bottom_left": false
+    }
+]

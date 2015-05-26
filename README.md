@@ -1,6 +1,9 @@
 # AB Open Workshop Projects
-A working directory of work in progress CAD files.
+A working directory of work in progress CAD files (RPWC).
 
+A simple PHP application to switch a browser running in kiosk mode on a RPi to different URLs (browser-control).
+
+Set up of a RPi with a camera to provide a stream on a URL (raspi-webcam)
 
 ## Disclaimer
 Files are work in progress and as such not necessarily approved, finished or suitable for production. Consider all files experimental. No support will be provided for using these files.

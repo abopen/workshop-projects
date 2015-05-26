@@ -1,0 +1,12 @@
+#!/bin/bash
+
+export DISPLAY=:0
+
+if  ps -eo args | egrep -q "^(/.*|)chromium .*$" ; then
+	killall chromium
+fi
+while ps -eo args | egrep -q "^(/.*|)chromium .*$" ; do
+	sleep 0
+done
+
+/usr/bin/chromium --kiosk $* &

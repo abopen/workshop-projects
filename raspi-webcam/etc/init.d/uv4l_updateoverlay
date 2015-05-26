@@ -1,0 +1,57 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          uv4l_updateoverlay
+# Required-Start:    uv4l_raspicam
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# X-Interactive:
+# Description: UV4L Overlay Update
+# Short-Description:    UV4L Overlay Update
+### END INIT INFO
+
+PATH='/sbin:/bin:/usr/bin:/usr/local/bin'
+
+NAME=uv4l_updateoverlay
+UV4L_OVERLAY=uv4l-updateoverlay.sh
+FIND_PID="ps -eo pid,args | grep uv4l-updateoverlay.sh | grep -v grep | awk '{print \$1}'"
+
+RET=0
+
+. /lib/lsb/init-functions
+
+kill_pid () {
+    PID=$(eval $FIND_PID)
+    if [ ! -z $PID ]; then
+        kill $PID
+        PID=$(eval $FIND_PID)
+        if [ ! -z $PID ]; then
+            sleep 3
+            kill -9 $PID
+        fi
+    fi
+}
+
+case "$1" in
+    start|reload|restart|force-reload)
+    	kill_pid
+	log_daemon_msg "Starting UV4L Overlay Update" "uv4l"
+	echo
+    	$UV4L_OVERLAY &>/dev/null &
+    	RET=$?
+        ;;
+    stop)
+    	kill_pid
+    	RET=$?
+        ;;
+    status)
+        ;;
+    *)
+    	log_failure_msg "Usage: /etc/init.d/$NAME {start|stop|restart}"
+    	RET=1
+        ;;
+esac
+
+exit $RET
+
+:
